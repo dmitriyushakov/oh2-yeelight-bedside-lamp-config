@@ -1,0 +1,72 @@
+rule "Bedside lamp switch changed"
+	when
+		Item Bedside_Lamp_Switch changed
+	then
+		if(Bedside_Lamp_Switch.state == ON){
+			bedside_lamp_switch_cmd_Args.sendCommand("on")
+		}else{
+			bedside_lamp_switch_cmd_Args.sendCommand("off")
+		}
+		
+		while(bedside_lamp_switch_cmd.state == ON){
+			Thread::sleep(500)
+		}
+		
+		bedside_lamp_switch_cmd.sendCommand(ON)
+end
+
+rule "Bedside lamp brightness changed"
+	when
+		Item Bedside_Lamp_Brightness changed
+	then
+		bedside_lamp_switch_cmd_Args.sendCommand("brightness " + Bedside_Lamp_Brightness.state)
+		
+		while(bedside_lamp_switch_cmd.state == ON){
+			Thread::sleep(500)
+		}
+	
+		bedside_lamp_switch_cmd.sendCommand(ON)
+end
+
+rule "Bedside lamp temperature changed"
+	when
+		Item Bedside_Lamp_Temperature_Dim changed
+	then
+		bedside_lamp_switch_cmd_Args.sendCommand("temperature " +  (1700 + (Bedside_Lamp_Temperature_Dim.state as Number).intValue * 48))
+		
+		while(bedside_lamp_switch_cmd.state == ON){
+			Thread::sleep(500)
+		}
+	
+		bedside_lamp_switch_cmd.sendCommand(ON)
+end
+
+rule "Bedside lamp temperature preset selected"
+	when
+		Item Bedside_Lamp_Temperature_Presets received command
+	then
+		var dimVal=0
+		
+		switch(receivedCommand){
+			case "t2700K":dimVal=21
+			case "t3200K":dimVal=31
+			case "t4000K":dimVal=48
+			case "t5000K":dimVal=69
+		}
+		
+		if(dimVal!=0)Bedside_Lamp_Temperature_Dim.sendCommand(dimVal)
+end
+
+
+rule "Bedside lamp color changed"
+	when
+		Item Bedside_Lamp_Color changed
+	then
+		bedside_lamp_switch_cmd_Args.sendCommand("color " + (Bedside_Lamp_Color.state as HSBType).red.intValue + " " + (Bedside_Lamp_Color.state as HSBType).green.intValue + " " + (Bedside_Lamp_Color.state as HSBType).blue.intValue)
+		
+		while(bedside_lamp_switch_cmd.state == ON){
+			Thread::sleep(500)
+		}
+	
+		bedside_lamp_switch_cmd.sendCommand(ON)
+end

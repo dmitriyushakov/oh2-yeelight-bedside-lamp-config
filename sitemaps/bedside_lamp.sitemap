@@ -1,0 +1,10 @@
+sitemap bedside_lamp label="Bedside lamp"
+{
+        Frame {
+            Switch item=Bedside_Lamp_Switch label="Power"
+            Slider item=Bedside_Lamp_Brightness label="Brightness"
+            Slider item=Bedside_Lamp_Temperature_Dim label="Temperature"
+			Switch item=Bedside_Lamp_Temperature_Presets label="Temperature Presets" mappings=[t2700K="2700K", t3200K="3200K", t4000K="4000K", t5000K="5000K"]
+            Colorpicker item=Bedside_Lamp_Color label="Color"
+        }
+}

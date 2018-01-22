@@ -1,0 +1,2 @@
+# Configuration for Yeelight Bedside Bluetooth Lamp work with openHAB 2
+This configuration works with [yeelightbt](https://github.com/rytilahti/python-yeelightbt) python library using Exec binding for sending command to Yeelight Bedside Lamp.

@@ -1,0 +1,9 @@
+Switch Bedside_Lamp_Switch
+Dimmer Bedside_Lamp_Brightness
+Dimmer Bedside_Lamp_Temperature_Dim
+Color Bedside_Lamp_Color
+String Bedside_Lamp_Temperature_Presets
+
+
+Switch bedside_lamp_switch_cmd {channel="exec:command:bedside_lamp_switch_cmd:run"}
+String bedside_lamp_switch_cmd_Args {channel="exec:command:bedside_lamp_switch_cmd:input"}

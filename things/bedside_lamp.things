@@ -1,0 +1,1 @@
+Thing exec:command:bedside_lamp_switch_cmd [ command="/usr/local/bin/yeelightbt --mac=\"F8:24:41:E9:C9:7C\"  %2$s", interval=0, autorun=false ]
